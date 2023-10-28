@@ -1,0 +1,33 @@
+version: '3.6'
+
+services:
+
+  local-ai:
+    image: quay.io/go-skynet/local-ai:latest
+    container_name: local-ai
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    volumes:
+      - ./models:/models:cached
+      - ./images:/tmp/generated/images
+    command: ["chmod -R 777 /tmp", "/usr/bin/local-ai"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 1m
+      timeout: 20m
+      retries: 20
+
+  flask-ui:
+    build:
+      context: flask-app/.
+    image: local/flask-ui:1.0
+    container_name: flask-ui
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      local-ai:
+        condition: service_healthy

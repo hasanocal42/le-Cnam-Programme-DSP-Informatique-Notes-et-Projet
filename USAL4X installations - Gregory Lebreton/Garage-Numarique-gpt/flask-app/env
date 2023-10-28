@@ -1,0 +1,19 @@
+#########################LOCALAI#########################
+
+# local-ai quand flask dockerisé
+LOCALAI_HOST=local-ai
+
+MODELS_PATH=/models
+
+DEBUG=true
+REBUILD=false
+
+#THREADS=4
+
+DEFAULT_MODEL=gpt-3.5-turbo
+PRELOAD_MODELS=[{"url":"github:go-skynet/model-gallery/gpt4all-j.yaml","name":"gpt-3.5-turbo"},{"url":"github:go-skynet/model-gallery/stablediffusion.yaml","name":"stablediffusion"}]
+
+#DEFAULT_MODEL=wizard-lm
+#PRELOAD_MODELS=[{"url":"github:go-skynet/model-gallery/openllama_7b.yaml","name":"open_llama"}]
+
+#GALLERIES=[{"name":"model-gallery","url":"github:go-skynet/model-gallery/index.yaml"}]

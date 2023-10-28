@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- formulaire image -->
+  <form action="/image" method="post" id="form">
+    <input type="text" name="image" placeholder="Description de l'image ici!" required />
+    <input type="submit" value="Go!" />
+  </form>
+
+  {% if result %}
+    <div class="result">{{ result|safe }}</div>
+  {% endif %}
+
+{% endblock %}

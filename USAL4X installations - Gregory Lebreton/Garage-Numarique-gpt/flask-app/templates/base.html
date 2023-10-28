@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- titre onglet -->
+    <title>GARAGE AI</title>
+  </head>
+
+  <body>
+
+    <!-- loader -->
+    <div id="loading-spinner">
+        <img src="{{ url_for('static', filename='loader.gif') }}" class="spinner">
+        <p>Loading ...</p>
+    </div>
+
+    <!-- titre -->
+    <h3>Garage AI</h3>
+
+    <!-- navbar -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light jumbotron">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% if request.path != '/' %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('index') }}">CHAT <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% elif request.path != '/image' %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('image') }}">IMAGE <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- result + bouton copier le code -->
+    <div class="container jumbotron">
+        {% block content %}
+        {% endblock %}
+        <button id="copyButton" style="display: none;" onclick="copyCodeToClipboard()">Copier le code</button>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="temps">{{ time }}</div>
+        <div>
+            <img src="{{ url_for('static', filename='logo.png') }}">
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script>  
+   <script>
+        // initialisation
+        const myForm = document.getElementById("form");
+        const loadingSpinner = document.getElementById("loading-spinner");
+
+        // submit = loader visible
+        myForm.addEventListener("submit", function (event){
+            loadingSpinner.style.display = "block";
+            }
+        );
+
+        // page loaded = hide loader + check si balise md pour affichage bouton copier
+        function onPageLoaded() {
+            loadingSpinner.style.display = "none";
+            if (document.getElementsByTagName("code").length > 0)
+                {
+                    var copyButton = document.getElementById("copyButton").style.display = "block"; // Affiche le bouton
+                }
+        }
+
+        //fonction pour copier dans le presse papier
+        function copyCodeToClipboard() {
+            var codeToCopy = document.querySelector("code");
+            var textArea = document.createElement("textarea");
+            textArea.value = codeToCopy.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>

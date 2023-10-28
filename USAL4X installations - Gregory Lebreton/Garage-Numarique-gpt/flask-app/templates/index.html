@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- formulaire gpt-turbo-3.5 -->
+  <form action="/" method="post" id="form">
+    <div class="settings">
+      <br>
+      <label for="valeur">Sélectionnez la température :</label>
+      <input type="range" id="valeur" name="temperature" min="0" max="1" step=".1">
+      <br>
+      <input type="text" name="question" placeholder="Ecrire la question ici!" required />
+      <br>
+    </div>
+    <br>
+      <input type="submit" value="Go!" />
+      <br>
+  </form>
+
+  {% if result %}
+    <div class="result">{{ result|safe }}</div>
+  {% endif %}
+  
+{% endblock %}
