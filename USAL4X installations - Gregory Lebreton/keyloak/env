@@ -1,0 +1,44 @@
+####################################################
+###################################################
+####                                          ####
+####            ENV                          ####
+####                                        ####
+###############################################
+##############################################
+
+#############################################
+##############################################
+####                                       ####
+####         KEYCLOAK ENV                   ####
+####                                         ####
+##################################################
+###################################################
+
+DB_VENDOR=POSTGRES
+DB_ADDR=keycloak_db
+DB_DATABASE=postgresdb
+DB_USER=postgresuser
+DB_SCHEMA=public
+DB_PASSWORD=pa55w0rd
+KEYCLOAK_USER=admin
+KEYCLOAK_PASSWORD=5up3rPa55w0rd
+PROXY_ADDRESS_FORWARDING=true
+KEYCLOAK_WELCOME_THEME=keycloak
+KEYCLOAK_DEFAULT_THEME=keycloak
+KEYCLOAK_DOMAIN_USER=domain
+KEYCLOAK_DOMAIN_PASSWORD=password
+KEYCLOAK_DOMAIN_USER_FIRST_NAME=Administrateur
+KEYCLOAK_DOMAIN_USER_NAME=Technique
+KEYCLOAK_DOMAIN_USER_EMAIL=contact@lmail.com
+
+#############################################
+##############################################  
+####                                       ####
+####         KEYCLOAK DB ENV                ####
+####                                         ####
+##################################################
+###################################################
+
+POSTGRES_DB=postgresdb
+POSTGRES_USER=postgresuser
+POSTGRES_PASSWORD=pa55w0rd

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  keycloak:
+      image: quay.io/keycloak/keycloak:16.0.0
+      container_name: keycloak
+      restart: always
+      #command: -Dkeycloak.profile.feature.upload_scripts=enabled
+      ports:
+        - 8051:8080
+      depends_on:
+        - keycloak_db
+      env_file:
+        - .env
+
+
+  keycloak_db:
+      image: postgres:13
+      container_name: keycloak-db
+      restart: always
+      volumes:
+        - /data/keycloak/postgres_data:/var/lib/postgresql/data
+      ports:
+        - 5435:5432
+      env_file:
+        - .env
