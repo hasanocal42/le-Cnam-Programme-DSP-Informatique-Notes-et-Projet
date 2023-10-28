@@ -1,0 +1,11 @@
+apiVersion: 1
+
+notifiers:
+  - name: garagenum
+    type: email
+    uid: 1
+    isDefault: true
+    sendReminder: true
+    disableResolveMessage: false
+    settings:
+      addresses:  email-1@mail.com;email-2@mail.com

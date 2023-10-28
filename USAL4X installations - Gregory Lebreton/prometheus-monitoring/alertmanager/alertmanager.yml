@@ -1,0 +1,38 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 5m
+  repeat_interval: 10m
+  receiver: 'email'
+
+receivers:
+- name: 'email'
+  email_configs:
+  - to: 'mail-1@mail.com, mail-2@mail.com'
+    from: 'mail@mail.com'
+    smarthost: 'smtp.mail-provider.net:port'
+    auth_username: 'mail@mail.com'
+    auth_password: 'password'
+    require_tls: yes
+    send_resolved: true
+
+# mute_time_intervals:
+#   - name: out-of-business-hours
+#     time_intervals:
+#     - weekdays: ['Saturday','Sunday']
+#     - times:
+#       - start_time: '00:00'
+#         end_time: '08:00'
+#       - start_time: '18:00'
+#         end_time: '24:00'
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
+
